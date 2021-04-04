@@ -338,3 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+# Coisas que não podem vazar do codigo
+**/Bot Discord/SECRETS.txt

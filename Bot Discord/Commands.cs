@@ -24,15 +24,17 @@ namespace Bot_Discord
         [Summary("repitir o usuário")]
         public Task SayAsync([Summary("desc")][Remainder] string echo)
         {
-            Context.Message.Author.SendMessageAsync("oi");
             return ReplyAsync(echo);
         }
-        [Command("url")]
+        [Command("url")] //todo remover esse debug, só ler o URL do SECRETS no Program.cs
         public Task Url([Summary("endereço com / no final")][Remainder] string echo)
         {
             return Task.Run(() =>
             {
-                url = echo;
+                var user = Context.Message.Author as SocketGuildUser;
+                var role = (user as IGuildUser).Guild.Roles.FirstOrDefault(x => x.Name == "Coordenação Digital");
+                if(role != null)
+                    url = echo;
             });
 
         }
@@ -40,6 +42,14 @@ namespace Bot_Discord
         public Task CadastroAsync()
         {
             return Context.Message.Author.SendMessageAsync($"{url}?id={Context.Message.Author.Id}&pic={System.Convert.ToBase64String(Encoding.UTF8.GetBytes(Context.Message.Author.GetAvatarUrl()))}&name={Context.Message.Author.Username}");
+        }
+
+        [Command("cargo")]
+        public Task CargoAsync()
+        {
+            var user = Context.User as SocketGuildUser;
+            var role = (user as IGuildUser).Guild.Roles.FirstOrDefault();
+            return ReplyAsync(role.Name);
         }
 
     }

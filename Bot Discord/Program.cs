@@ -21,7 +21,7 @@ namespace Bot_Discord
 
             _client.Log += Log;
 
-            var token = System.IO.File.ReadAllText(Environment.CurrentDirectory + "/TOKEN_DO_BOT.TXT");
+            var token = System.IO.File.ReadAllLines(Environment.CurrentDirectory + "/SECRETS.TXT")[0];
 
             await _client.LoginAsync(TokenType.Bot, token);
             await _client.StartAsync();
