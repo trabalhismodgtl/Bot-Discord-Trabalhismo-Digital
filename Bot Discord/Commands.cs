@@ -52,7 +52,7 @@ namespace Bot_Discord
             {
                 // Embed property can be set within object initializer
                 Title = "Formulário",
-                Description = @"Clique em **Formulário** logo acima para iniciar seu cadastro!"
+                Description = @"Clique em __**Formulário**__ logo acima para iniciar seu cadastro!"
             };
             // Or with methods
             embed.WithAuthor(Context.Client.GetUser(167389495182753792))
