@@ -38,12 +38,6 @@ namespace Bot_Discord
             });
 
         }
-        [Command("cadastro")]
-        public Task CadastroAsync()
-        {
-            return Context.Message.Author.SendMessageAsync($"{url}?id={Context.Message.Author.Id}&pic={System.Convert.ToBase64String(Encoding.UTF8.GetBytes(Context.Message.Author.GetAvatarUrl()))}&name={Context.Message.Author.Username}");
-        }
-
         [Command("cargo")]
         public Task CargoAsync()
         {
@@ -51,6 +45,25 @@ namespace Bot_Discord
             var role = (user as IGuildUser).Guild.Roles.FirstOrDefault();
             return ReplyAsync(role.Name);
         }
+        [Command("cadastro")]
+        public Task CardAsync() 
+        {
+            var embed = new EmbedBuilder
+            {
+                // Embed property can be set within object initializer
+                Title = "Formulário",
+                Description = @"Clique em 'Formulário' logo acima para iniciar seu cadastro!"
+            };
+            // Or with methods
+            embed.WithAuthor(Context.Client.GetUser(167389495182753792))
+                .WithFooter(footer => footer.Text = "Trabalhismo Digital")
+                .WithColor(Color.Red)
+                .WithImageUrl("https://user-images.githubusercontent.com/81885777/113494306-6dfda000-94bd-11eb-882c-ec16ff3c4b18.png")
+                .WithUrl($"{url}?id={Context.Message.Author.Id}&pic={System.Convert.ToBase64String(Encoding.UTF8.GetBytes(Context.Message.Author.GetAvatarUrl()))}&name={Context.Message.Author.Username}")
+                .WithCurrentTimestamp();
 
+            //Your embed needs to be built before it is able to be sent
+            return Context.Message.Author.SendMessageAsync(embed: embed.Build());
+        }
     }
 }
