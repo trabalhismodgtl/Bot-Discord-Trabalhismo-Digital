@@ -13,7 +13,8 @@ namespace Bot_Discord
     public class Server
     {
         public static HttpListener listener;
-        public static string url = "http://localhost:8000/";
+        public static string url = System.IO.File.ReadAllLines(Environment.CurrentDirectory + "/SECRETS.TXT")[1];
+        public static string key = System.IO.File.ReadAllLines(Environment.CurrentDirectory + "/SECRETS.TXT")[2];
         public static int pageViews = 0;
         public static int requestCount = 0;
         public static string pageData = "";
@@ -55,7 +56,11 @@ namespace Bot_Discord
                         text = reader.ReadToEnd();
                     }
                     var user = JsonConvert.DeserializeObject<SimpleDiscordObject>(text);
-                    OnRegister.Invoke(user.DiscordID);
+                    if (user.Key == key)
+                    {
+                        resp.StatusCode = 200;
+                        OnRegister.Invoke(user.DiscordID);
+                    }
                 }
 
                 // Make sure we don't increment the page views counter if `favicon.ico` is requested

@@ -10,5 +10,6 @@ namespace Bot_Discord.POCO
     {
         public string Name { get; set; }
         public ulong DiscordID { get; set; }
+        public string Key { get; set; }
     }
 }

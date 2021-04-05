@@ -68,7 +68,6 @@ namespace Bot_Discord
 
         private Task _client_MessageReceived(SocketMessage message)
         {
-            Console.WriteLine(message.Content);
             if(message.Content.ToLower().Contains("paris") && message.Content.ToLower().Contains("foi"))
             {
                 message.Channel.SendMessageAsync("Je crois que non");
