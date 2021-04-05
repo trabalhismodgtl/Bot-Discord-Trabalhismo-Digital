@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Bot_Discord
@@ -32,6 +33,7 @@ namespace Bot_Discord
 
             await _client.LoginAsync(TokenType.Bot, token);
             await _client.StartAsync();
+            await _client.SetGameAsync("seu nome para fora do SPC!");
             var commands = new CommandHandler(_client, new Discord.Commands.CommandService());
             await commands.InstallCommandsAsync();
             // Block this task until the program is closed.
@@ -66,15 +68,19 @@ namespace Bot_Discord
 
         private Task _client_MessageReceived(SocketMessage message)
         {
+            Console.WriteLine(message.Content);
             if(message.Content.ToLower().Contains("paris") && message.Content.ToLower().Contains("foi"))
             {
                 message.Channel.SendMessageAsync("Je crois que non");
                 return message.Channel.SendMessageAsync("https://www.ocafezinho.com/wp-content/uploads/2018/11/45323522-2149527855375634-2236660852830765056-n.jpg");
             }
-            else if(IsAllUpper(message.Content))
+            else if(message.Content != "" && IsAllUpper(message.Content))
             {
-                message.Channel.SendMessageAsync($"Calma dona Maria... Digo... {message.Author.Mention}");
-                return message.Channel.SendMessageAsync("https://i.imgur.com/eTZyqx1.gif");
+                if (message.Content.Replace(".","").Replace(",","").Replace("?","").Replace("!","").All(Char.IsLetter))
+                {
+                    message.Channel.SendMessageAsync($"Calma dona Maria... Digo... {message.Author.Mention}");
+                    return message.Channel.SendMessageAsync("https://i.imgur.com/eTZyqx1.gif");
+                }
             }
             return Task.CompletedTask;
         }
