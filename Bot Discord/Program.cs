@@ -1,7 +1,9 @@
-﻿using Discord;
+﻿using Bot_Discord.Properties;
+using Discord;
 using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -11,8 +13,12 @@ namespace Bot_Discord
 {
     class Program
     {
+        static MemoryStream Paris = new MemoryStream();
         public static void Main(string[] args)
-            => new Program().MainAsync().GetAwaiter().GetResult();
+        {
+            Resources.paris.Save(Paris, System.Drawing.Imaging.ImageFormat.Bmp);
+            new Program().MainAsync().GetAwaiter().GetResult();
+        }
 
         private DiscordSocketClient _client;
         public async Task MainAsync()
@@ -20,6 +26,7 @@ namespace Bot_Discord
             _client = new DiscordSocketClient();
 
             _client.Log += Log;
+            _client.MessageReceived += _client_MessageReceived;
 
             var token = System.IO.File.ReadAllLines(Environment.CurrentDirectory + "/SECRETS.TXT")[0];
 
@@ -46,6 +53,32 @@ namespace Bot_Discord
 
             await Task.Delay(-1);
         }
+        //todo colocar isso numa classe de utils
+        bool IsAllUpper(string input)
+        {
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (Char.IsLetter(input[i]) && !Char.IsUpper(input[i]))
+                    return false;
+            }
+            return true;
+        }
+
+        private Task _client_MessageReceived(SocketMessage message)
+        {
+            if(message.Content.ToLower().Contains("paris") && message.Content.ToLower().Contains("foi"))
+            {
+                message.Channel.SendMessageAsync("Je crois que non");
+                return message.Channel.SendMessageAsync("https://www.ocafezinho.com/wp-content/uploads/2018/11/45323522-2149527855375634-2236660852830765056-n.jpg");
+            }
+            else if(IsAllUpper(message.Content))
+            {
+                message.Channel.SendMessageAsync($"Calma dona Maria... Digo... {message.Author.Mention}");
+                return message.Channel.SendMessageAsync("https://i.imgur.com/eTZyqx1.gif");
+            }
+            return Task.CompletedTask;
+        }
+
         private Task Log(LogMessage msg)
         {
             Console.WriteLine(msg.ToString());

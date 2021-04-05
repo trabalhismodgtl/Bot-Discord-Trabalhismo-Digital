@@ -65,5 +65,10 @@ namespace Bot_Discord
             //Your embed needs to be built before it is able to be sent
             return Context.Message.Author.SendMessageAsync(embed: embed.Build());
         }
+        [Command("tomaladaca")]
+        public Task TomaLaAsync()
+        {
+            return SayAsync("https://1.bp.blogspot.com/--VdvMaYWbow/WPEbxA5_g5I/AAAAAAAA844/GzWLBYWBoTckpoeusG6lyg-gRqUlNFF9ACLcB/s1600/gif%2Bciro%2Bgomes.gif");
+        }
     }
 }
