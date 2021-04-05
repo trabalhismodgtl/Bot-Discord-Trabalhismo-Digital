@@ -78,7 +78,7 @@ namespace Bot_Discord
                 if (Regex.Replace(message.Content.Replace(".", "").Replace(",", "").Replace("?", "").Replace("!", ""), @"[\d-]", string.Empty).All(Char.IsLetter))
                 {
                     message.Channel.SendMessageAsync($"Calma dona Maria... Digo... {message.Author.Mention}");
-                    return message.Channel.SendMessageAsync("https://i.imgur.com/eTZyqx1.gif");
+                    return message.Channel.SendMessageAsync("http://i.imgur.com/eTZyqx1.gif");
                 }
             }
             return Task.CompletedTask;
