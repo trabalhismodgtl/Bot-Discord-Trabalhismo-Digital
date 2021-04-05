@@ -32,7 +32,7 @@ namespace Bot_Discord
             return Task.Run(() =>
             {
                 var user = Context.Message.Author as SocketGuildUser;
-                var role = (user as IGuildUser).Guild.Roles.FirstOrDefault(x => x.Name == "Coordenação Digital");
+                var role = (user as IGuildUser).Guild.Roles.FirstOrDefault(x => x.Name == "Coordenação");
                 if(role != null)
                     url = echo;
             });
