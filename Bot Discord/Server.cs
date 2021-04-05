@@ -58,7 +58,6 @@ namespace Bot_Discord
                     var user = JsonConvert.DeserializeObject<SimpleDiscordObject>(text);
                     if (user.Key == key)
                     {
-                        resp.StatusCode = 200;
                         OnRegister.Invoke(user.DiscordID);
                     }
                 }
