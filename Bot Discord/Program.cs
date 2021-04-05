@@ -76,7 +76,7 @@ namespace Bot_Discord
             }
             else if(message.Content != "" && IsAllUpper(message.Content))
             {
-                if (message.Content.Replace(".","").Replace(",","").Replace("?","").Replace("!","").All(Char.IsLetter))
+                if (Regex.Replace(message.Content.Replace(".", "").Replace(",", "").Replace("?", "").Replace("!", ""), @"[\d-]", string.Empty).All(Char.IsLetter))
                 {
                     message.Channel.SendMessageAsync($"Calma dona Maria... Digo... {message.Author.Mention}");
                     return message.Channel.SendMessageAsync("https://i.imgur.com/eTZyqx1.gif");
