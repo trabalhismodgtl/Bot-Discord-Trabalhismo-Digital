@@ -61,6 +61,10 @@ namespace Bot_Discord
                         OnRegister.Invoke(user.DiscordID);
                     }
                 }
+                if((req.HttpMethod == "GET") && req.Url.AbsolutePath == "/robots.txt")
+                {
+                    pageData = File.ReadAllText(System.Environment.CurrentDirectory + "/robots.txt",Encoding.UTF8);
+                }
 
                 // Make sure we don't increment the page views counter if `favicon.ico` is requested
                 if (req.Url.AbsolutePath != "/favicon.ico")

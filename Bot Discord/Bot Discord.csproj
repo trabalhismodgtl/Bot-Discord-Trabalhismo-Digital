@@ -255,5 +255,10 @@
   <ItemGroup>
     <None Include="Resources\45323522-2149527855375634-2236660852830765056-n.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="robots.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
