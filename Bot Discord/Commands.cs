@@ -70,5 +70,10 @@ namespace Bot_Discord
         {
             return SayAsync("https://1.bp.blogspot.com/--VdvMaYWbow/WPEbxA5_g5I/AAAAAAAA844/GzWLBYWBoTckpoeusG6lyg-gRqUlNFF9ACLcB/s1600/gif%2Bciro%2Bgomes.gif");
         }
+        [Command("pnd")]
+        public Task PndAsync()
+        {
+            return SayAsync("https://todoscomciro.com/pnd/?locale=pt_br");
+        }
     }
 }
