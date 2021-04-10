@@ -73,7 +73,7 @@ namespace Bot_Discord
                 message.Channel.SendMessageAsync("Je crois que non");
                 return message.Channel.SendMessageAsync("https://www.ocafezinho.com/wp-content/uploads/2018/11/45323522-2149527855375634-2236660852830765056-n.jpg");
             }
-            else if(message.Content != "" && IsAllUpper(message.Content))
+            else if(message.Content != "" && message.Content.Length>4 && IsAllUpper(message.Content))
             {
                 if (Regex.Replace(message.Content.Replace(".", "").Replace(",", "").Replace("?", "").Replace("!", ""), @"[\d-]", string.Empty).All(Char.IsLetter))
                 {
