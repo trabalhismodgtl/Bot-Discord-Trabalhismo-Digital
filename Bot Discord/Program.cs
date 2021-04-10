@@ -80,6 +80,10 @@ namespace Bot_Discord
                     return message.Channel.SendMessageAsync($"Calma dona Maria... Digo... {message.Author.Mention} http://i.imgur.com/eTZyqx1.gif");
                 }
             }
+            else if((message.Content.ToLower().Contains("amo") || message.Content.ToLower().Contains("adoro")) && message.Content.ToLower().Contains("esse") && message.Content.ToLower().Contains("bot"))
+            {
+                return message.Channel.SendMessageAsync("https://tenor.com/view/ciro-gomes-memes-ciro-gomes-ciro12-ciro-cora%C3%A7%C3%A3o-ciro-cora%C3%A7%C3%A3ozinho-gif-12501781");
+            }
             return Task.CompletedTask;
         }
 
